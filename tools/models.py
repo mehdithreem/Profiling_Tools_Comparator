@@ -14,5 +14,11 @@ class Tool(models.Model):
         through_fields=('tool', 'criteria'),
     )
 
+    tasks_scores = models.ManyToManyField(
+        'tasks.Task',
+        through='tasks.TaskScore',
+        through_fields=('tool', 'task'),
+    )
+
     def __str__(self):
         return self.name +  ' (v' + self.version + ')'
