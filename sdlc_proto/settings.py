@@ -25,7 +25,7 @@ SECRET_KEY = 't6z*)tqfem5zz89@y-p&rjb@un9a7!3wqnfi)q96$*tco3in=j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mehdithreem.com']
+ALLOWED_HOSTS = ['mehdithreem.com', '127.0.0.1', 'localhost']
 
 
 # Application definition

@@ -11,10 +11,10 @@ class Criteria(models.Model):
     hurts = models.IntegerField(default=0)
     parent = models.ForeignKey('Criteria', on_delete=models.CASCADE, null=True, blank=True)
 
-    def __str__(self):
-        return '[' + str(self.pk) + '] [+' + str(self.benefits) + '] [-' + str(self.hurts) + '] ' + self.name + ' -'
+    category = models.CharField(max_length=150, null=True)
 
-    #TODO: add category
+    def __str__(self):
+        return '[' + str(self.pk) + '] [' + str(self.category) + '] ' + self.name + ' -'
 
 class CriteriaScore(models.Model):
     criteria = models.ForeignKey(Criteria, on_delete=models.CASCADE)
