@@ -26,4 +26,4 @@ class TaskScore(models.Model):
         unique_together = (('task', 'tool'),)
 
     def __str__(self):
-        return '[' + self.tool.name + '] task:' + self.task.name
+        return '[' + self.tool.name + '] task:' + '#' + str(self.task.id) + self.task.name
