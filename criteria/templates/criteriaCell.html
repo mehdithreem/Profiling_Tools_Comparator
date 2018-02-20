@@ -1,0 +1,31 @@
+{% load common_tags %}
+
+<td
+        {% if node.leafCount > 0 %}
+            rowspan="{{ node.leafCount }}"
+        {% elif node.depth < treeHeight %}
+            colspan="{{ treeHeight|sub:node.depth|add:1 }}"
+        {% endif %}
+>
+    {% if not node.isSelfScore %}
+        {{ node.criteria.name }} #{{ node.criteria.pk }}
+    {% else %}
+        Overall
+    {% endif %}
+</td>
+
+{% if node.leafCount == 0 %}
+    {% for tool in tools%}
+        {% with node.scores|dictLookup:tool.pk|getField:'score' as givenScore %}
+            {% if givenScore %}
+                <td>
+                    {{ givenScore }}
+                </td>
+            {% else %}
+                <td style="background: red">
+                    Not Scored
+                </td>
+            {% endif %}
+        {% endwith %}
+    {% endfor %}
+{% endif %}

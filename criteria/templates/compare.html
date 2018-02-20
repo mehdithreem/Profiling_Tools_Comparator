@@ -1,0 +1,23 @@
+<style>
+table, th, td {
+    border: 1px solid black;
+}
+</style>
+
+<table>
+    <tr>
+        <th colspan="{{ treeHeight|add:1 }}"></th>
+
+        {% for tool in tools %}
+            <th>{{ tool.name }} v{{ tool.version }}</th>
+        {% endfor %}
+
+    </tr>
+    {% for row in rowGroup %}
+        <tr>
+            {% for cell in row %}
+                {% include 'criteriaCell.html' with node=cell treeHeight=treeHeight tools=tools %}
+            {% endfor %}
+        </tr>
+    {% endfor %}
+</table>

@@ -20,5 +20,9 @@ class Tool(models.Model):
         through_fields=('tool', 'task'),
     )
 
+    @staticmethod
+    def getAll():
+        return Tool.objects.all()
+
     def __str__(self):
         return self.name +  ' (v' + self.version + ')'
