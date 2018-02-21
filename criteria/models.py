@@ -12,6 +12,8 @@ class Criteria(models.Model):
     hurts = models.FloatField(default=0.0)
     parent = models.ForeignKey('Criteria', on_delete=models.CASCADE, null=True, blank=True)
 
+    inspiredFrom = models.CharField(max_length=250, null=True, blank=True)
+
     SCORE_MODE_CHOICES = (
         ('0', 'Only Use Children'),
         ('1', 'Include Self Score')
