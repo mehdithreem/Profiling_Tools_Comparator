@@ -8,7 +8,7 @@
         {% endif %}
 >
     {% if not node.isSelfScore %}
-        {{ node.criteria.name }} [{{ node.criteria.pk }}]
+        {{ node.criteria.name }} [{{ node.criteria.pk }}] B{{ node.criteria.benefits }} H{{ node.criteria.hurts }}
         <a
             href="#"
             onClick="window.open('/manage/criteria/criteria/{{ node.criteria.pk }}/change/?_to_field=id&_popup=1','Edit Criteria', 'width=600,height=400'); return false;">
