@@ -1,4 +1,4 @@
-from common_tags.apps import register
+from sdlc_proto.common_tags.apps import register
 
 @register.filter
 def sub(value, arg):

@@ -31,10 +31,10 @@ ALLOWED_HOSTS = ['mehdithreem.com', '127.0.0.1', 'localhost']
 # Application definition
 
 INSTALLED_APPS = [
-    'criteria.apps.CriteriaConfig',
-    'tools.apps.ToolsConfig',
-    'tasks.apps.TasksConfig',
-    'common_tags.apps.CommonTagsConfig',
+    'sdlc_proto.criteria',
+    'sdlc_proto.tools',
+    'sdlc_proto.tasks',
+    'sdlc_proto.common_tags',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -123,3 +123,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+STATICFILES_DIRS = (
+  os.path.join(SITE_ROOT, 'static/'),
+)

@@ -1,9 +1,9 @@
 from django.contrib import admin
 
 # Register your models here.
-from criteria.models import CriteriaScore
-from tasks.models import TaskScore
-from tools.models import Tool
+from sdlc_proto.criteria.models import CriteriaScore
+from sdlc_proto.tasks.models import TaskScore
+from sdlc_proto.tools.models import Tool
 
 
 class CriteriaScoreInline(admin.TabularInline):

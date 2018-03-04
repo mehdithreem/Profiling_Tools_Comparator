@@ -1,17 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from criteria.models import Criteria, RealCriteriaDisplayNode, CriteriaScore
-from tools.models import Tool
+from sdlc_proto.criteria.models import Criteria, RealCriteriaDisplayNode, CriteriaScore
+from sdlc_proto.tools.models import Tool
 
 
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
-
-
-class Tools(object):
-    pass
-
 
 def compareAll(request):
     nodes = []

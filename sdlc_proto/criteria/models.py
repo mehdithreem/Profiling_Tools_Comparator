@@ -2,7 +2,7 @@ from abc import abstractmethod
 
 from django.db import models
 
-from tools.models import Tool
+from sdlc_proto.tools.models import Tool
 
 
 class Criteria(models.Model):

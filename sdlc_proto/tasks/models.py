@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-from tools.models import Tool
+from sdlc_proto.tools.models import Tool
 
 
 class Task(models.Model):
