@@ -1,7 +1,46 @@
 <style>
-table, th, td {
-    border: 1px solid black;
-}
+    :root {
+        --border-w: 4px;
+        --cell-back-color: #f0f0f0;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    td {
+        border: var(--border-w) solid white;
+        background: var(--cell-back-color);
+        padding: 2px 10px;
+    }
+
+    td.overall {
+        position: relative;
+    }
+
+    td.overall::after {
+        position: absolute;
+        content: '';
+        width: var(--border-w);
+        height: 100%;
+        background: var(--cell-back-color);
+        left: calc(0px - var(--border-w));
+        top: 0;
+    }
+
+    tr:nth-child(2) > td:first-child {
+        border-top-left-radius: 15px;
+    }
+    tr:nth-child(2) > td:last-child {
+        border-top-right-radius: 15px;
+    }
+    tr:last-child > td:first-child {
+        border-bottom-left-radius: 15px;
+    }
+    tr:last-child > td:last-child {
+        border-bottom-right-radius: 15px;
+    }
+
 </style>
 
 <table>
