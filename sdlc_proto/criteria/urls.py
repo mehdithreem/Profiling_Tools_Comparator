@@ -4,5 +4,6 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('all', views.compareAll, name='compareAll')
+    path('all', views.compareAll, name='compareAll'),
+    path('update', views.updateCriteria, name='updateCriteria')
 ]

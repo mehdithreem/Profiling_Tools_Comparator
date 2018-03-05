@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.core.serializers import json
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -27,3 +29,24 @@ def compareAll(request):
         'treeHeight': treeHeight,
         'tools': toolsList
     })
+
+@login_required
+def updateCriteria(request):
+    pk = request.POST['pk']
+    description = request.POST['description']
+    inspiredFrom = request.POST['inspiredFrom']
+    benefits = request.POST['benefits']
+    hurts = request.POST['hurts']
+
+    print(description, inspiredFrom, benefits, hurts, pk)
+
+    target = Criteria.objects.get(pk=pk)
+
+    target.description = description
+    target.inspiredFrom = inspiredFrom
+    target.benefits = benefits
+    target.hurts = hurts
+
+    target.save()
+
+    return HttpResponse(True)

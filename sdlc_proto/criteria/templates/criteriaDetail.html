@@ -1,0 +1,41 @@
+<style>
+    .ui.form .field > * {
+        width: 100%;
+    }
+</style>
+
+
+<form class="ui update-criteria form" id="criteriaForm{{ criteria.pk }}">
+    {% csrf_token %}
+    <input name="pk" type="hidden" value="{{ criteria.pk }}">
+    <h4 class="ui dividing header">{{ criteria.name }} [{{ criteria.pk }}]
+        <a
+                href="#"
+                onClick="window.open('/manage/criteria/criteria/{{ node.criteria.pk }}/change/?_to_field=id&_popup=1','Edit Criteria', 'width=600,height=400'); return false;">
+            edit</a></h4>
+    <div class="field">
+        <label>Description</label>
+        <textarea rows="4" title="Description" name="description">{{ criteria.description }}</textarea>
+    </div>
+    <div class="field">
+        <label>Inspired From</label>
+        <input name="inspiredFrom" type="text" value="{% if criteria.inspiredFrom %}{{ criteria.inspiredFrom }}{% endif %}">
+    </div>
+    <div class="field">
+        <label>Benefits</label>
+        <input name="benefits" type="range" min="0" max="5" step="0.01" value="{{ criteria.benefits }}">
+        <output></output>
+    </div>
+    <div class="field">
+        <label>Hurts</label>
+        <input name="hurts" type="range" min="0" max="5" step="0.01" value="{{ criteria.hurts }}">
+        <output></output>
+    </div>
+    <div class="field">
+        <div class="ui buttons">
+            <button type="reset" class="ui button suggest">Rest</button>
+            <div class="or"></div>
+            <button class="ui positive button save-criteria">Save Changes</button>
+        </div>
+    </div>
+</form>

@@ -11,18 +11,13 @@
             class="overall"
         {% endif %}
 >
-    <div class="cell-container">
+    <div class="cell-container" id="criteriaCell{{ node.criteria.pk }}">
         {% if not node.isSelfScore %}
             {{ node.criteria.name }} [{{ node.criteria.pk }}] B{{ node.criteria.benefits }} H{{ node.criteria.hurts }}
-            <a
-                    href="#"
-                    onClick="window.open('/manage/criteria/criteria/{{ node.criteria.pk }}/change/?_to_field=id&_popup=1','Edit Criteria', 'width=600,height=400'); return false;">
-                edit</a>
         {% endif %}
     </div>
-    <div class="ui flowing popup">
-        <div class="header">{{ node.criteria.description }}</div>
-        <div class="ui button">Click Me</div>
+    <div class="ui flowing popup criteria-detail-popup" id="criteriaPopup{{ node.criteria.pk }}">
+        {% include 'criteriaDetail.html' with criteria=node.criteria %}
     </div>
 </td>
 
