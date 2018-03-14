@@ -6,6 +6,13 @@ $(function () {
         })
     ;
 
+    $('.score-container')
+        .popup({
+            on: 'click',
+            inline: false
+        })
+    ;
+
     function getParameterByName(name, url) {
         if (!url) url = window.location.href;
         name = name.replace(/[\[\]]/g, "\\$&");
@@ -39,6 +46,38 @@ $(function () {
                 var textContent = ('textContent' in document) ? 'textContent' : 'innerText';
                 criteriaCell.children('.benefits-score')[0][textContent] = 'B' + getParameterByName('benefits', formData);
                 criteriaCell.children('.hurts-score')[0][textContent] = 'H' + getParameterByName('hurts', formData);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                document.getElementById(elementId).reset();
+            }
+        });
+        return false;
+    });
+
+    $('.save-score').click(function () {
+        var form = $(this).closest('form.score-criteria');
+        var formData = form.serialize();
+        var elementId = form.attr('id');
+
+        $.ajax({
+            url: '/criteria/score',
+            data: formData,
+            type: 'post',
+            cache: false,
+            success: function (data) {
+                console.log('success ', elementId, 'score');
+                var sid = elementId.split('scoreForm')[1];
+
+                var scoreCell = $('#scoreCell' + sid);
+
+                scoreCell
+                    .popup('hide');
+
+                scoreCell.css('background', 'inherit');
+
+
+                var textContent = ('textContent' in document) ? 'textContent' : 'innerText';
+                scoreCell.children('.score')[0][textContent] = getParameterByName('score', formData);
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 document.getElementById(elementId).reset();

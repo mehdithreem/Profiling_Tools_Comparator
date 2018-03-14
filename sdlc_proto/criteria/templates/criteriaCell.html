@@ -26,25 +26,20 @@
 
 {% if node.leafCount == 0 %}
     {% for tool in tools %}
-        {% with node.scores|dictLookup:tool.pk|getField:'score' as givenScore %}
-            {% if givenScore %}
-                <td>
-                    {{ givenScore }}
-
-                    <a
-                            href="#"
-                            onClick="window.open('/manage/criteria/criteriascore/{{ node.scores|dictLookup:tool.pk|getField:'pk' }}/change/?_to_field=id&_popup=1','Edit Score', 'width=600,height=400'); return false;">
-                        edit</a>
-                </td>
-            {% else %}
-                <td style="background: red">
-                    Not Scored
-                    <a
-                            href="#"
-                            onClick="window.open('/manage/criteria/criteriascore/add/?_to_field=id&_popup=1','Score', 'width=600,height=400'); return false;">
-                        score</a>
-                </td>
-            {% endif %}
+        {% with givenScore=node.scores|dictLookup:tool.pk|getField:'score' givenNotes=node.scores|dictLookup:tool.pk|getField:'notes' %}
+            <td>
+                <div class="score-container" id="scoreCellC{{ node.criteria.pk }}T{{ tool.pk }}" {% if not givenScore %}
+                     style="background: red"{% endif %}>
+                    <span class="score">{% if givenScore %} {{ givenScore }} {% else %} Not Scored {% endif %}</span>
+                </div>
+                <div class="ui flowing popup score-detail-popup" id="scorePopupC{{ node.criteria.pk }}T{{ tool.pk }}">
+                    {% if givenScore %}
+                        {% include 'scoreDetail.html' with criteria=node.criteria tool=tool initialScore=givenScore initialNotes=givenNotes %}
+                    {% else %}
+                        {% include 'scoreDetail.html' with criteria=node.criteria tool=tool initialScore=0 initialNotes='' %}
+                    {% endif %}
+                </div>
+            </td>
         {% endwith %}
     {% endfor %}
 {% endif %}

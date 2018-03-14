@@ -1,0 +1,34 @@
+<style>
+    .ui.form .field > * {
+        width: 100%;
+    }
+</style>
+
+
+<form class="ui score-criteria form" id="scoreFormC{{ criteria.pk }}T{{ tool.pk }}">
+    {% csrf_token %}
+    <input name="criteriaId" type="hidden" value="{{ criteria.pk }}">
+    <input name="toolId" type="hidden" value="{{ tool.pk }}">
+    <h4 class="ui dividing header">Score of {{ tool.name }} [{{ tool.pk }}] for {{ criteria.name }} [{{ criteria.pk }}]
+        <a
+                href="#"
+                onClick="window.open('/manage/criteria/criteria/{{ criteria.pk }}/change/?_to_field=id&_popup=1','Edit Criteria', 'width=600,height=400'); return false;">
+        edit</a>
+    </h4>
+    <div class="field">
+        <label>Score</label>
+        <input name="score" type="range" min="0" max="5" step="0.01" value="{{ initialScore }}">
+        <output></output>
+    </div>
+    <div class="field">
+        <label>Notes</label>
+        <textarea rows="4" title="Notes" name="notes">{{ initialNotes }}</textarea>
+    </div>
+    <div class="field">
+        <div class="ui buttons">
+            <button type="reset" class="ui button suggest">Rest</button>
+            <div class="or"></div>
+            <button class="ui positive button save-score">Save Changes</button>
+        </div>
+    </div>
+</form>
