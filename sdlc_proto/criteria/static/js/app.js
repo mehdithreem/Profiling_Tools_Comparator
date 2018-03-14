@@ -6,6 +6,16 @@ $(function () {
         })
     ;
 
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
     $('.save-criteria').click(function () {
         var form = $(this).closest('form.update-criteria');
         var formData = form.serialize();
@@ -18,9 +28,17 @@ $(function () {
             cache: false,
             success: function (data) {
                 console.log('success ', elementId, 'change');
+                var cid = elementId.split('criteriaForm')[1];
 
-                $('#criteriaCell' + elementId.split('criteriaForm')[1])
+                var criteriaCell = $('#criteriaCell' + cid);
+
+                criteriaCell
                     .popup('hide');
+
+
+                var textContent = ('textContent' in document) ? 'textContent' : 'innerText';
+                criteriaCell.children('.benefits-score')[0][textContent] = 'B' + getParameterByName('benefits', formData);
+                criteriaCell.children('.hurts-score')[0][textContent] = 'H' + getParameterByName('hurts', formData);
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 document.getElementById(elementId).reset();

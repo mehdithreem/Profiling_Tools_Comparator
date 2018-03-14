@@ -38,8 +38,6 @@ def updateCriteria(request):
     benefits = request.POST['benefits']
     hurts = request.POST['hurts']
 
-    print(description, inspiredFrom, benefits, hurts, pk)
-
     target = Criteria.objects.get(pk=pk)
 
     target.description = description

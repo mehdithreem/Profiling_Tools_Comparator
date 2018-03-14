@@ -13,7 +13,10 @@
 >
     <div class="cell-container" id="criteriaCell{{ node.criteria.pk }}">
         {% if not node.isSelfScore %}
-            {{ node.criteria.name }} [{{ node.criteria.pk }}] B{{ node.criteria.benefits }} H{{ node.criteria.hurts }}
+            <span class="name">{{ node.criteria.name }}</span>
+            [{{ node.criteria.pk }}]
+            <span class="benefits-score">B{{ node.criteria.benefits }} </span>
+            <span class="hurts-score">H{{ node.criteria.hurts }}</span>
         {% endif %}
     </div>
     <div class="ui flowing popup criteria-detail-popup" id="criteriaPopup{{ node.criteria.pk }}">
