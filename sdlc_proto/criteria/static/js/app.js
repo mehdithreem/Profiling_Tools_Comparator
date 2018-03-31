@@ -91,6 +91,27 @@ $(function () {
     function valueOutput(element) {
         var value = element.value;
         var output = element.parentNode.getElementsByTagName('output')[0] || element.parentNode.parentNode.getElementsByTagName('output')[0];
+
+        if (element.name === "benefits") {
+            const textList = [
+                    'مزیت خاصی محسوب نمی‌شه',
+                    'کار رو کمی راحت‌تر می‌کنه',
+                    'مفید و بدرد بخوره',
+                    'بسیار کار راه‌اندازه'
+                ];
+
+            value = value + "   وجودش " +  textList[parseInt(value)];
+        } else if (element.name === "hurts") {
+            const textList = [
+                    'مشکلی به وجود نمیاره',
+                    'مشکلات جزئی ایجاد می‌کنه',
+                    'مشکل سازه',
+                    'کار رو فلج می‌کنه'
+                ];
+
+            value = value + "   عدم وجودش " +  textList[parseInt(value)];
+        }
+
         output[textContent] = value;
     }
 
