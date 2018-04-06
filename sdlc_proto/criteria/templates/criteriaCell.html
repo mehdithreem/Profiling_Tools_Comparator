@@ -28,12 +28,12 @@
     {% for tool in tools %}
         {% with givenScore=node.scores|dictLookup:tool.pk|getField:'score' givenNotes=node.scores|dictLookup:tool.pk|getField:'notes' %}
             <td>
-                <div class="score-container" id="scoreCellC{{ node.criteria.pk }}T{{ tool.pk }}" {% if not givenScore %}
+                <div class="score-container" id="scoreCellC{{ node.criteria.pk }}T{{ tool.pk }}" {% if givenScore != 0 and not givenScore %}
                      style="background: red"{% endif %}>
-                    <span class="score">{% if givenScore %} {{ givenScore }} {% else %} Not Scored {% endif %}</span>
+                    <span class="score">{% if givenScore or givenScore == 0 %} {{ givenScore }} {% else %} Not Scored {% endif %}</span>
                 </div>
                 <div class="ui flowing popup score-detail-popup" id="scorePopupC{{ node.criteria.pk }}T{{ tool.pk }}">
-                    {% if givenScore %}
+                    {% if givenScore or givenScore == 0 %}
                         {% include 'scoreDetail.html' with criteria=node.criteria tool=tool initialScore=givenScore initialNotes=givenNotes %}
                     {% else %}
                         {% include 'scoreDetail.html' with criteria=node.criteria tool=tool initialScore=0 initialNotes='' %}
