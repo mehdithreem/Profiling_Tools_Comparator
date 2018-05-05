@@ -113,7 +113,6 @@ $(function () {
         } else if (element.name === "score") {
             const textList = [
                 'Not available',
-                'Have serious issues',
                 'Below average',
                 'As expected',
                 'Above average',
