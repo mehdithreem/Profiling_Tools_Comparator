@@ -120,7 +120,10 @@ class RealCriteriaDisplayNode(CriteriaDisplayNode):
         else:
             for toolId in self.calculatedScores.keys():
                 S = self.calculatedScores[toolId]
-                self.calculatedScores[toolId] = S / sigmaB
+                try:
+                    self.calculatedScores[toolId] = S / sigmaB
+                except ZeroDivisionError:
+                    self.calculatedScores[toolId] = 0
 
 
         # if self score
