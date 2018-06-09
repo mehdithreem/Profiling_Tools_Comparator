@@ -15,11 +15,11 @@
         {% if not node.isSelfScore %}
             <span class="name">{{ node.criteria.name }}</span>
             {%  if node.criteria.inspiredFrom %}<span>[{{ node.criteria.inspiredFrom }}]</span>{% endif %}
-{#            [{{ node.criteria.pk }}]#}
+            [{{ node.criteria.pk }}]
             <br>
             <span class="benefits-score">B: {{ node.criteria.benefits }} </span>
             <span class="hurts-score"> H: {{ node.criteria.hurts }}</span>
-{#            <br><span>{{ node.calculatedScores }}</span>#}
+            <br><span>Score {{ node.calculatedScores }}</span>
 {#            <br><br>#}
 {#            <span style="font-size: 0.8em; color: gray;">{{ node.criteria.description }}</span>#}
         {% endif %}

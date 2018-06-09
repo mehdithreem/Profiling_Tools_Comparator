@@ -136,7 +136,9 @@ class RealCriteriaDisplayNode(CriteriaDisplayNode):
                 SChildren = self.calculatedScores[toolId]
                 BChildren = sigmaB / len(self.children)
                 HChildren = sigmaH / len(self.children)
-                SSelf = scaleScore(self.scores[toolId].score)
+                SSelf = 0
+                if (toolId in self.scores):
+                        SSelf = scaleScore(self.scores[toolId].score)
                 BSelf = 3
                 HSelf = 3
                 self.calculatedScores[toolId] = max((calculateSingleScore(SChildren,BChildren,HChildren) + calculateSingleScore(SSelf,BSelf,HSelf)) / (BChildren + BSelf), 0)
