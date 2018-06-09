@@ -116,14 +116,15 @@ class RealCriteriaDisplayNode(CriteriaDisplayNode):
         if (len(self.children) == 0):
             for toolId in self.scores.keys():
                 S = self.scores[toolId].score
-                self.calculatedScores[toolId] = scaleScore(S)
+                self.calculatedScores[toolId] = max(0, scaleScore(S))
         else:
             for toolId in self.calculatedScores.keys():
                 S = self.calculatedScores[toolId]
                 try:
-                    self.calculatedScores[toolId] = S / sigmaB
+                    self.calculatedScores[toolId] = max(0, S / sigmaB)
                 except ZeroDivisionError:
-                    self.calculatedScores[toolId] = 0
+                    print('ZeroDivisionError Occurred', toolId, self.criteria.id)
+                    self.calculatedScores[toolId] = max(0, S)
 
 
         # if self score
@@ -138,7 +139,7 @@ class RealCriteriaDisplayNode(CriteriaDisplayNode):
                 SSelf = scaleScore(self.scores[toolId].score)
                 BSelf = 3
                 HSelf = 3
-                self.calculatedScores[toolId] = (calculateSingleScore(SChildren,BChildren,HChildren) + calculateSingleScore(SSelf,BSelf,HSelf)) / (BChildren + BSelf)
+                self.calculatedScores[toolId] = max((calculateSingleScore(SChildren,BChildren,HChildren) + calculateSingleScore(SSelf,BSelf,HSelf)) / (BChildren + BSelf), 0)
 
 
     def getRowGroups(self):
