@@ -14,9 +14,14 @@
     <div class="cell-container" id="criteriaCell{{ node.criteria.pk }}">
         {% if not node.isSelfScore %}
             <span class="name">{{ node.criteria.name }}</span>
+            {%  if node.criteria.inspiredFrom %}<span>[{{ node.criteria.inspiredFrom }}]</span>{% endif %}
             [{{ node.criteria.pk }}]
-            <span class="benefits-score">B{{ node.criteria.benefits }} </span>
-            <span class="hurts-score">H{{ node.criteria.hurts }}</span>
+            <br>
+            <span class="benefits-score">B: {{ node.criteria.benefits }} </span>
+            <span class="hurts-score"> H: {{ node.criteria.hurts }}</span>
+            <br><span>Score {{ node.calculatedScores }}</span>
+{#            <br><br>#}
+{#            <span style="font-size: 0.8em; color: gray;">{{ node.criteria.description }}</span>#}
         {% endif %}
     </div>
     <div class="ui flowing popup criteria-detail-popup" id="criteriaPopup{{ node.criteria.pk }}">
@@ -30,7 +35,13 @@
             <td>
                 <div class="score-container" id="scoreCellC{{ node.criteria.pk }}T{{ tool.pk }}" {% if givenScore != 0 and not givenScore %}
                      style="background: red"{% endif %}>
-                    <span class="score">{% if givenScore or givenScore == 0 %} {{ givenScore }} {% else %} Not Scored {% endif %}</span>
+                    <span class="score">{% if givenScore or givenScore == 0 %}
+                        {{ givenScore }}
+{#                        <br><br>#}
+{#                        <span style="font-size: 0.8em; color: gray;">{{ givenNotes }}</span>#}
+                    {% else %}
+                        Not Scored
+                    {% endif %}</span>
                 </div>
                 <div class="ui flowing popup score-detail-popup" id="scorePopupC{{ node.criteria.pk }}T{{ tool.pk }}">
                     {% if givenScore or givenScore == 0 %}
